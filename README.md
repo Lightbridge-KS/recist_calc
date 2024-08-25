@@ -5,8 +5,10 @@
 
 ## Install
 
+**From TestPyPi:** <https://test.pypi.org/project/recist-calc>
+
 ``` sh
-pip install recist_calc
+pip install -i https://test.pypi.org/simple/ recist-calc
 ```
 
 ## How to use
