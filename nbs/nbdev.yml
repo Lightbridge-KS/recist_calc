@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "recist-calc"
+  site-url: "https://Lightbridge-KS.github.io/recist_calc"
+  description: "RECIST1.1 Calculator"
+  repo-branch: main
+  repo-url: "https://github.com/Lightbridge-KS/recist_calc"
