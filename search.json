@@ -1,0 +1,122 @@
+[
+  {
+    "objectID": "timepoint.html",
+    "href": "timepoint.html",
+    "title": "RECIST v1.1 Timepoint",
+    "section": "",
+    "text": "source\n\n\n\n\n RecistTimePoint (target:recist_calc.target.RecistTarget=&lt;factory&gt;,\n                  nontarget:recist_calc.nontarget.RecistNonTarget=&lt;factory\n                  &gt;, is_new_lesion:bool=None)\n\nThis class represents the RECIST (Response Evaluation Criteria in Solid Tumors) evaluation for a specific time point, combining the assessments of target and non-target lesions.",
+    "crumbs": [
+      "RECIST v1.1 Timepoint"
+    ]
+  },
+  {
+    "objectID": "timepoint.html#recisttimepoint-dataclass",
+    "href": "timepoint.html#recisttimepoint-dataclass",
+    "title": "RECIST v1.1 Timepoint",
+    "section": "",
+    "text": "source\n\n\n\n\n RecistTimePoint (target:recist_calc.target.RecistTarget=&lt;factory&gt;,\n                  nontarget:recist_calc.nontarget.RecistNonTarget=&lt;factory\n                  &gt;, is_new_lesion:bool=None)\n\nThis class represents the RECIST (Response Evaluation Criteria in Solid Tumors) evaluation for a specific time point, combining the assessments of target and non-target lesions.",
+    "crumbs": [
+      "RECIST v1.1 Timepoint"
+    ]
+  },
+  {
+    "objectID": "timepoint.html#example",
+    "href": "timepoint.html#example",
+    "title": "RECIST v1.1 Timepoint",
+    "section": "Example",
+    "text": "Example\n\nProgressive Disease (PD) - Due to New Lesion\nScenario: A new lesion has appeared, which indicates Progressive Disease (PD).\n\ntarget = RecistTarget(current_mm=25, baseline_mm=20, is_new_lesion=True)\nnontarget = RecistNonTarget(unequivocal_progress=False)\ntimepoint = RecistTimePoint(target=target, nontarget=nontarget)\n\nprint(timepoint.category)\n\n{'final': 'PD', 'target': 'PD', 'nontarget': 'Non-CR/Non-PD'}\n\n\n\n\nProgressive Disease (PD) - Due to Increase from Nadir\nScenario: The target lesion has increased in size by more than 20% from the nadir with an absolute increase of at least 5 mm, indicating PD.\n\ntarget = RecistTarget(current_mm=40, baseline_mm=30, nadir_mm=30)\nnontarget = RecistNonTarget(unequivocal_progress=False)\ntimepoint = RecistTimePoint(target=target, nontarget=nontarget)\nprint(timepoint.category)\n\n{'final': 'PD', 'target': 'PD', 'nontarget': 'Non-CR/Non-PD'}\n\n\n\n\nComplete Response (CR)\nScenario: Both target and non-target lesions have disappeared, indicating Complete Response (CR).\n\ntarget = RecistTarget(current_mm=0, baseline_mm=25, is_ln_pathological=False)\nnontarget = RecistNonTarget(disappear_all=True, is_tumor_mk_normalized=True, is_ln_pathological=False)\ntimepoint = RecistTimePoint(target=target, nontarget=nontarget)\nprint(timepoint.category)\n\n{'final': 'CR', 'target': 'CR', 'nontarget': 'CR'}\n\n\n\n\nPartial Response (PR)\nScenario: The target lesion has decreased in size by at least 30% from baseline, and the non-target lesion is stable, indicating Partial Response (PR).\n\ntarget = RecistTarget(current_mm=15, baseline_mm=30)\nnontarget = RecistNonTarget(unequivocal_progress=False)\ntimepoint = RecistTimePoint(target=target, nontarget=nontarget)\nprint(timepoint.category)\n\n{'final': 'PR', 'target': 'PR', 'nontarget': 'Non-CR/Non-PD'}\n\n\n\n\nStable Disease (SD)\nScenario: The target lesion shows a minor decrease in size (less than 30% from baseline), and the non-target lesion is stable, indicating Stable Disease (SD).\n\ntarget = RecistTarget(current_mm=28, baseline_mm=30)\nnontarget = RecistNonTarget(unequivocal_progress=False)\ntimepoint = RecistTimePoint(target=target, nontarget=nontarget)\nprint(timepoint.category)\n\n{'final': 'SD', 'target': 'SD', 'nontarget': 'Non-CR/Non-PD'}\n\n\n\n\nNot Evaluable (NE)\nScenario: Insufficient data is available to evaluate the target lesion, so the time point is categorized as Not Evaluable (NE).\n\ntarget = RecistTarget(current_mm=None, baseline_mm=30)\nnontarget = RecistNonTarget(unequivocal_progress=None)\ntimepoint = RecistTimePoint(target=target, nontarget=nontarget)\nprint(timepoint.category)\n\n{'final': 'NE', 'target': 'NE', 'nontarget': 'NE'}",
+    "crumbs": [
+      "RECIST v1.1 Timepoint"
+    ]
+  },
+  {
+    "objectID": "target.html",
+    "href": "target.html",
+    "title": "Target Lesion",
+    "section": "",
+    "text": "source\n\n\n\n\n RecistTarget (current_mm:float=None, baseline_mm:float=None,\n               nadir_mm:float=None, is_new_lesion:bool=None,\n               is_ln_pathological:bool=None)\n\nThis class represents the RECIST (Response Evaluation Criteria in Solid Tumors) evaluation for target lesions at a specific time point.",
+    "crumbs": [
+      "Target Lesion"
+    ]
+  },
+  {
+    "objectID": "target.html#recisttarget-dataclass",
+    "href": "target.html#recisttarget-dataclass",
+    "title": "Target Lesion",
+    "section": "",
+    "text": "source\n\n\n\n\n RecistTarget (current_mm:float=None, baseline_mm:float=None,\n               nadir_mm:float=None, is_new_lesion:bool=None,\n               is_ln_pathological:bool=None)\n\nThis class represents the RECIST (Response Evaluation Criteria in Solid Tumors) evaluation for target lesions at a specific time point.",
+    "crumbs": [
+      "Target Lesion"
+    ]
+  },
+  {
+    "objectID": "target.html#example",
+    "href": "target.html#example",
+    "title": "Target Lesion",
+    "section": "Example",
+    "text": "Example\n\nPD\n\ntarget1 = RecistTarget(\n    current_mm=40,\n    baseline_mm=30,\n    nadir_mm=30,\n    is_new_lesion=False\n)\nprint(target1) \n\n\ntarget2 = RecistTarget(\n    current_mm=10,\n    baseline_mm=2,\n    nadir_mm=1,\n    is_new_lesion=True\n)\nprint(target2)\n\nRecistTarget(category='PD', current_mm=40, baseline_mm=30, baseline_pc_change=33.33333333333333, nadir_mm=30, nadir_pc_change=33.33333333333333, is_new_lesion=False, is_ln_pathological=None)\nRecistTarget(category='PD', current_mm=10, baseline_mm=2, baseline_pc_change=400.0, nadir_mm=1, nadir_pc_change=900.0, is_new_lesion=True, is_ln_pathological=None)\n\n\n\n\nCR\n\ntarget3 = RecistTarget(\n    current_mm=0,\n    baseline_mm=25,\n    nadir_mm=25,\n    is_ln_pathological=False\n)\nprint(target3)\n\nRecistTarget(category='CR', current_mm=0, baseline_mm=25, baseline_pc_change=-100.0, nadir_mm=25, nadir_pc_change=-100.0, is_new_lesion=None, is_ln_pathological=False)\n\n\n\n\nPR\n\ntarget4 = RecistTarget(\n    current_mm=20,\n    baseline_mm=40,\n    nadir_mm=30,\n    is_new_lesion=False\n)\nprint(target4)\n\nRecistTarget(category='PR', current_mm=20, baseline_mm=40, baseline_pc_change=-50.0, nadir_mm=30, nadir_pc_change=-33.33333333333333, is_new_lesion=False, is_ln_pathological=None)\n\n\n\n\nSD\n\ntarget5 = RecistTarget(\n    current_mm=28,\n    baseline_mm=30,\n    nadir_mm=28,\n    is_new_lesion=False\n)\nprint(target5)\n\nRecistTarget(category='SD', current_mm=28, baseline_mm=30, baseline_pc_change=-6.666666666666667, nadir_mm=28, nadir_pc_change=0.0, is_new_lesion=False, is_ln_pathological=None)\n\n\n\n\nNE\n\ntarget6 = RecistTarget(\n    current_mm=None,\n    baseline_mm=30,\n    nadir_mm=28,\n    is_new_lesion=False\n)\nprint(target6)\n\nRecistTarget(category='NE', current_mm=None, baseline_mm=30, baseline_pc_change=None, nadir_mm=28, nadir_pc_change=None, is_new_lesion=False, is_ln_pathological=None)",
+    "crumbs": [
+      "Target Lesion"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "RECIST v1.1 Calculator",
+    "section": "",
+    "text": "From TestPyPi: https://test.pypi.org/project/recist-calc\npip install -i https://test.pypi.org/simple/ recist-calc",
+    "crumbs": [
+      "RECIST v1.1 Calculator"
+    ]
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "RECIST v1.1 Calculator",
+    "section": "",
+    "text": "From TestPyPi: https://test.pypi.org/project/recist-calc\npip install -i https://test.pypi.org/simple/ recist-calc",
+    "crumbs": [
+      "RECIST v1.1 Calculator"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "RECIST v1.1 Calculator",
+    "section": "How to use",
+    "text": "How to use\n\nimport recist_calc\n\n\nTarget Lesion Calculation\n\ntarget = RecistTarget(\n    current_mm=40,\n    baseline_mm=30,\n    nadir_mm=30,\n    is_new_lesion=False\n)\n\ntarget\n\nRecistTarget(category='PD', current_mm=40, baseline_mm=30, baseline_pc_change=33.33333333333333, nadir_mm=30, nadir_pc_change=33.33333333333333, is_new_lesion=False, is_ln_pathological=None)\n\n\n\n\nNon-Target Lesion Calculation\n\nnon_target = RecistNonTarget(\n    unequivocal_progress=False,\n    disappear_all=False,\n    is_new_lesion=False,\n    is_ln_pathological=True,\n    is_tumor_mk_normalized=False\n)\nnon_target\n\nRecistNonTarget(category='Non-CR/Non-PD', unequivocal_progress=False, disappear_all=False, is_new_lesion=False, is_ln_pathological=True, is_tumor_mk_normalized=False)\n\n\n\n\nTimepoint Evaluation\n\ntimepoint = RecistTimePoint(target=target, nontarget=non_target)\ntimepoint\n\nRecistTimePoint(target=RecistTarget(category='PD', current_mm=40, baseline_mm=30, baseline_pc_change=33.33333333333333, nadir_mm=30, nadir_pc_change=33.33333333333333, is_new_lesion=False, is_ln_pathological=None), nontarget=RecistNonTarget(category='Non-CR/Non-PD', unequivocal_progress=False, disappear_all=False, is_new_lesion=False, is_ln_pathological=True, is_tumor_mk_normalized=False), is_new_lesion=False, category={'final': 'PD', 'target': 'PD', 'nontarget': 'Non-CR/Non-PD'})\n\n\n\ntimepoint.__dict__\n\n{'target': RecistTarget(category='PD', current_mm=40, baseline_mm=30, baseline_pc_change=33.33333333333333, nadir_mm=30, nadir_pc_change=33.33333333333333, is_new_lesion=False, is_ln_pathological=None),\n 'nontarget': RecistNonTarget(category='Non-CR/Non-PD', unequivocal_progress=False, disappear_all=False, is_new_lesion=False, is_ln_pathological=True, is_tumor_mk_normalized=False),\n 'is_new_lesion': False,\n 'category': {'final': 'PD', 'target': 'PD', 'nontarget': 'Non-CR/Non-PD'}}",
+    "crumbs": [
+      "RECIST v1.1 Calculator"
+    ]
+  },
+  {
+    "objectID": "nontarget.html",
+    "href": "nontarget.html",
+    "title": "Non-Target Lesion",
+    "section": "",
+    "text": "source\n\n\n\n\n RecistNonTarget (unequivocal_progress:bool=None, disappear_all:bool=None,\n                  is_new_lesion:bool=None, is_ln_pathological:bool=None,\n                  is_tumor_mk_normalized:bool=None)\n\nThis class represents the RECIST (Response Evaluation Criteria in Solid Tumors) evaluation for non-target lesions in a given time point.",
+    "crumbs": [
+      "Non-Target Lesion"
+    ]
+  },
+  {
+    "objectID": "nontarget.html#recistnontarget-dataclass",
+    "href": "nontarget.html#recistnontarget-dataclass",
+    "title": "Non-Target Lesion",
+    "section": "",
+    "text": "source\n\n\n\n\n RecistNonTarget (unequivocal_progress:bool=None, disappear_all:bool=None,\n                  is_new_lesion:bool=None, is_ln_pathological:bool=None,\n                  is_tumor_mk_normalized:bool=None)\n\nThis class represents the RECIST (Response Evaluation Criteria in Solid Tumors) evaluation for non-target lesions in a given time point.",
+    "crumbs": [
+      "Non-Target Lesion"
+    ]
+  },
+  {
+    "objectID": "nontarget.html#examples",
+    "href": "nontarget.html#examples",
+    "title": "Non-Target Lesion",
+    "section": "Examples",
+    "text": "Examples\n\nPD\n\nnon_target1 = RecistNonTarget(\n    unequivocal_progress=True,\n    disappear_all=False,\n    is_new_lesion=False,\n    is_ln_pathological=True,\n    is_tumor_mk_normalized=False\n)\nprint(non_target1)  \n\nnon_target2 = RecistNonTarget(\n    unequivocal_progress=False,\n    disappear_all=False,\n    is_new_lesion=True,\n    is_ln_pathological=True,\n    is_tumor_mk_normalized=False\n)\nprint(non_target2)\n\nRecistNonTarget(category='PD', unequivocal_progress=True, disappear_all=False, is_new_lesion=False, is_ln_pathological=True, is_tumor_mk_normalized=False)\nRecistNonTarget(category='PD', unequivocal_progress=False, disappear_all=False, is_new_lesion=True, is_ln_pathological=True, is_tumor_mk_normalized=False)\n\n\n\n\nCR\n\nnon_target3 = RecistNonTarget(\n    unequivocal_progress=False,\n    disappear_all=True,\n    is_new_lesion=False,\n    is_ln_pathological=False,\n    is_tumor_mk_normalized=True\n)\nprint(non_target3)  # Expected Output: \"CR\"\n\nRecistNonTarget(category='CR', unequivocal_progress=False, disappear_all=True, is_new_lesion=False, is_ln_pathological=False, is_tumor_mk_normalized=True)\n\n\n\n\nNon-CR/Non-PD\n\nnon_target4 = RecistNonTarget(\n    unequivocal_progress=False,\n    disappear_all=False,\n    is_new_lesion=False,\n    is_ln_pathological=True,\n    is_tumor_mk_normalized=False\n)\nprint(non_target4)  # Expected Output: \"Non-CR/Non-PD\"\n\nRecistNonTarget(category='Non-CR/Non-PD', unequivocal_progress=False, disappear_all=False, is_new_lesion=False, is_ln_pathological=True, is_tumor_mk_normalized=False)\n\n\n\n\nNE\n\nnon_target5 = RecistNonTarget(\n    unequivocal_progress=None,\n    disappear_all=None,\n    is_new_lesion=None,\n    is_ln_pathological=None,\n    is_tumor_mk_normalized=None\n)\nprint(non_target5)  # Expected Output: \"NE\"\n\nRecistNonTarget(category='NE', unequivocal_progress=None, disappear_all=None, is_new_lesion=None, is_ln_pathological=None, is_tumor_mk_normalized=None)",
+    "crumbs": [
+      "Non-Target Lesion"
+    ]
+  }
+]
